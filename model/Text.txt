@@ -1,0 +1,10 @@
+access-list highACL TCP 10.1.1.0 0.0.0.255 eq 80 172.16.1.0 0.0.0.255 eq 80
+access-list highACL TCP 10.1.1.1 0.0.0.233 eq 22 172.16.1.2 0.0.0.233 eq 22
+access-list lowACL UDP host 10.0.0.1 eq 80 host 192.168.0.1 eq 20
+access-list generalACL IP any any
+class highCl bandwidth percent 0.7 queue-limit 256
+class lowCl bandwidth percent 0.2 queue-limit 256
+class class-default bandwidth percent 0.1 queue-limit 64
+class-map highCl match access-group highACL 
+class-map lowCl match access-group lowACL
+class-map class-default match access-group generalACL

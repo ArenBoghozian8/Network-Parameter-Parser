@@ -1,0 +1,93 @@
+<acl_list>
+  <acl id="highACL">
+    <entry>
+      <source_address>10.1.1.0
+      </source_address>
+      <source_address_mask>0.0.0.255
+      </source_address_mask>
+      <source_port_number>80
+      </source_port_number>
+      <destination_address>172.16.1.0
+      </destination_address>
+      <destination_address_mask>0.0.0.255
+      </destination_address_mask>
+      <destination_port_number>80
+      </destination_port_number>
+      <protocol>TCP
+      </protocol>
+    </entry>
+    <entry>
+      <source_address>any
+      </source_address>
+      <source_address_mask>
+      </source_address_mask>
+      <source_port_number>
+      </source_port_number>
+      <destination_address>any
+      </destination_address>
+      <destination_address_mask>
+      </destination_address_mask>
+      <destination_port_number>
+      </destination_port_number>
+      <protocol>TCP
+      </protocol>
+    </entry>
+  </acl>
+  <acl id="lowACL">
+    <entry>
+      <source_address>10.1.1.1
+      </source_address>
+      <source_address_mask>
+      </source_address_mask>
+      <source_port_number>21
+      </source_port_number>
+      <destination_address>172.16.1.0
+      </destination_address>
+      <destination_address_mask>0.0.0.255
+      </destination_address_mask>
+      <destination_port_number>
+      </destination_port_number>
+      <protocol>UDP
+      </protocol>
+    </entry>
+  </acl>
+  <acl id="generalACL">
+    <entry>
+      <source_address>any
+      </source_address>
+      <source_address_mask>
+      </source_address_mask>
+      <source_port_number>
+      </source_port_number>
+      <destination_address>any
+      </destination_address>
+      <destination_address_mask>
+      </destination_address_mask>
+      <destination_port_number>
+      </destination_port_number>
+      <protocol>IP
+      </protocol>
+    </entry>
+  </acl>
+</acl_list>
+<class_list>
+  <class id="highCl" acl_id="highACL">
+    <queue_limit>256
+    </queue_limit>
+    <weight>0.7
+    </weight>
+  </class>
+  <class id="lowCl" acl_id="lowACL">
+    <weight>0.2
+    </weight>
+    <queue_limit>256
+    </queue_limit>
+  </class>
+  <class id="class-default">
+    <queue_limit>64
+    </queue_limit>
+    <weight>0.1
+    </weight>
+  </class>
+</class_list>
+
